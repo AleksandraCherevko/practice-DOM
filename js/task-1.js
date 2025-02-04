@@ -1,12 +1,15 @@
-// скрипт посчитает и выведет в консоль количество категорий в  ul#categories, то есть элементов  li.item.
-// Для кожного елемента li.item у списку ul#categories знайде й виведе в консоль текст заголовка
-// елемента (тегу <h2>) і кількість елементів у категорії (усіх <li>, вкладених у нього).
+// This script will count and log to the console the number of categories in ul#categories, i.e., the li.item elements.
+// For each li.item element in the ul#categories list, it will find and log to the console the text of the element's title
+// (the <h2> tag) and the number of elements in the category (all nested <li> elements).
+
+const bodyColor = document.querySelector("body");
+bodyColor.classList.add("js-body-task-first");
 
 const allCategories = document.querySelectorAll(".item");
-
 console.log(`Number of categories: ${allCategories.length}`);
 
 allCategories.forEach((category) => {
+  category.classList.add("js-category-item-task-first");
   categoriesName(category);
 });
 
@@ -25,7 +28,3 @@ function categoriesName(element) {
     item.classList.add("js-item-task-first");
   });
 }
-
-// styles
-const bodyColor = document.querySelector("body");
-bodyColor.classList.add("js-body-task-first");
