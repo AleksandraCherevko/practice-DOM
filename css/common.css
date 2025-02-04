@@ -110,3 +110,22 @@ img {
 .js-item-task-first:hover {
   transform: scale(1.1);
 }
+
+/*TASK SECOND */
+
+.body-second-task {
+  display: flex;
+  justify-content: center;
+}
+
+.list-second-task {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 24px;
+  row-gap: 48px;
+}
+
+.item-second-task {
+  flex-basis: calc((100% - 48px) / 3);
+}

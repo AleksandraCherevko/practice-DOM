@@ -22,5 +22,63 @@ const images = [
   {
     url: "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
     alt: "Lighthouse Coast Sea",
-  }
+  },
 ];
+
+// 1 variant
+
+// images.forEach((picture) => {
+//   const listEl = document.querySelector(".gallery");
+//   listEl.classList.add("list-second-task");
+
+//   const imgEl = document.createElement("img");
+//   const itemEl = document.createElement("li");
+//   const bodyEl = document.querySelector("body");
+//   bodyEl.classList.add("body-second-task");
+//   itemEl.classList.add("item-second-task");
+//   imgEl.src = picture.url;
+//   imgEl.alt = picture.alt;
+//   imgEl.width = "300";
+//   imgEl.height = "360";
+//   itemEl.append(imgEl);
+//   listEl.append(itemEl);
+// });
+
+// 2 variant
+
+// function createImgList(image) {
+
+//   const imgEl = document.createElement("img");
+//   const itemEl = document.createElement("li");
+//   imgEl.src = image.url;
+//   imgEl.alt = image.alt;
+//   imgEl.width = "300";
+//   imgEl.height = "360";
+//   itemEl.append(imgEl);
+
+//   const bodyEl = document.querySelector("body");
+//   bodyEl.classList.add("body-second-task");
+//   itemEl.classList.add("item-second-task");
+
+//   return itemEl;
+// }
+
+// const itemEl = images.map(createImgList);
+// const listEl = document.querySelector(".gallery");
+// listEl.classList.add("list-second-task");
+// listEl.append(...itemEl);
+
+// 3 variant
+
+const list = document.querySelector(".gallery");
+list.classList.add("list-second-task");
+
+const markupList = (image) => {
+  return `<li class="item-second-task">
+    <img src="${image.url}" alt="${image.alt}" />
+  </li>`;
+};
+
+const markup = images.map(markupList).join("");
+
+list.insertAdjacentHTML("beforeend", markup);
