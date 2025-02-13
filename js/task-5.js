@@ -10,18 +10,9 @@ function getRandomHexColor() {
     .toString(16)
     .padStart(6, "0")}`;
 }
-function hexToRgba(hex, alpha = 1) {
-  hex = hex.replace(/^#/, "");
-  let r = parseInt(hex.substring(0, 2), 16);
-  let g = parseInt(hex.substring(2, 4), 16);
-  let b = parseInt(hex.substring(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
 
 btn.addEventListener("click", () => {
-  const hexColor = getRandomHexColor();
-  const rgbaColor = hexToRgba(hexColor, 0.5);
-
-  body.style.backgroundColor = rgbaColor;
-  colorSpan.textContent = rgbaColor;
+  const newColor = getRandomHexColor();
+  body.style.backgroundColor = newColor;
+  colorSpan.textContent = newColor;
 });
