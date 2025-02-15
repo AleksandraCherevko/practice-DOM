@@ -206,7 +206,7 @@ img {
   border-radius: 8px;
 }
 
-.submitbtn-task-four:hover,
+.submitBtn-task-four:hover,
 .submitBtn-task-four:focus {
   background: rgba(108, 140, 255, 1);
 }
@@ -252,4 +252,24 @@ img {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+/* TASK SIX */
+
+.deleteBtn-task-six {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-top: 16px;
+  padding: 8px 16px;
+  color: rgba(255, 255, 255, 1);
+  background: rgba(255, 78, 78, 1);
+  border: none;
+  border-radius: 8px;
+}
+
+.deleteBtn-task-six:hover,
+.deleteBtn-task-six:focus {
+  background: rgba(255, 112, 112, 1);
 }
