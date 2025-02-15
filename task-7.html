@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 7</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <p><a href="./index.html">Go back</a></p>
+    <form class="form" id="user-form">
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Your name"
+        required
+        autocomplete="off"
+      />
+      <input
+        type="number"
+        name="age"
+        id="age"
+        placeholder="Your age"
+        required
+      />
+      <input type="color" id="avatar-color" />
+      <button type="submit">Create user card</button>
+    </form>
+    <ul id="user-list"></ul>
+    <script src="./js/task-7.js" type="module"></script>
+  </body>
+</html>
