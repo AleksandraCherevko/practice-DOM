@@ -1,26 +1,48 @@
 const userForm = document.querySelector(".form");
 // const nameInput = document.querySelector("#name");
 // const ageInput = document.querySelector("#age");
-// const colorInput = document.querySelector("#avatar-color");
+const colorInput = document.querySelector("#avatar-color");
 // const createCardBtn = document.querySelector("button");
-// const userList = document.querySelector("#user-list");
+const userList = document.querySelector("#user-list");
 
 userForm.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
+  const data = event.target;
+  const nameInput = data.elements.name.value.trim();
+  const ageInput = data.elements.age.value.trim();
 
-  const nameInput = event.target.elements.name.value.trim();
-  const ageInput = event.target.elements.age.value.trim();
-
-  if (nameInput === " " || ageInput === " ") {
-    return console.log("All form fields must be filled in !!!");
+  if (nameInput === "" || ageInput === "" || ageInput < 0) {
+    return alert("All form fields must be filled in !!!");
   }
 
-  console.log(`Login: ${name}, Password: ${age}`);
-  form.reset();
+  const cardMarkup = createCard({ name: nameInput, age: ageInput });
+  userList.insertAdjacentHTML("beforeend", cardMarkup);
+
+  const deleteBtn = userList.lastElementChild.querySelector(".delete-btn");
+  deleteBtn.addEventListener("click", deleteCard);
+
+  userForm.reset();
 }
 
+const createCard = ({ name, age }) => {
+  return `
+      <li class="card">
+        <div class="avatar"></div>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <button class='delete-btn'>Delete</button>
+      </li>
+    `;
+};
+
+const deleteCard = (event) => {
+  const card = event.target.closest(".card");
+  if (card) {
+    card.remove();
+  }
+};
 
 // Создай веб-страницу с формой, где пользователь вводит имя, возраст и выбирает цвет аватара. После нажатия на кнопку "Добавить", введенные данные должны отображаться в списке ниже.
 
