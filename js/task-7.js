@@ -1,9 +1,18 @@
 const userForm = document.querySelector(".form");
-// const nameInput = document.querySelector("#name");
-// const ageInput = document.querySelector("#age");
+userForm.classList.add("user-form-task-seven");
 const colorInput = document.querySelector("#avatar-color");
-// const createCardBtn = document.querySelector("button");
+const inputs = document.querySelectorAll("input");
+inputs.forEach((input) => {
+  input.classList.add("inputs-task-seven");
+});
+
+const label = document.querySelector("label");
+label.classList.add("label-task-seven");
+const createBtn = document.querySelector("button");
+createBtn.classList.add("createCardBtn");
+
 const userList = document.querySelector("#user-list");
+userList.classList.add("user-list-task-seven");
 
 userForm.addEventListener("submit", handleSubmit);
 
@@ -12,12 +21,18 @@ function handleSubmit(event) {
   const data = event.target;
   const nameInput = data.elements.name.value.trim();
   const ageInput = data.elements.age.value.trim();
+  const colorInput = data.elements["avatar-color"].value;
 
   if (nameInput === "" || ageInput === "" || ageInput < 0) {
-    return alert("All form fields must be filled in !!!");
+    showRedAlert("All form fields must be filled in !!!");
+    return;
   }
 
-  const cardMarkup = createCard({ name: nameInput, age: ageInput });
+  const cardMarkup = createCard({
+    name: nameInput,
+    age: ageInput,
+    color: colorInput,
+  });
   userList.insertAdjacentHTML("beforeend", cardMarkup);
 
   const deleteBtn = userList.lastElementChild.querySelector(".delete-btn");
@@ -26,10 +41,10 @@ function handleSubmit(event) {
   userForm.reset();
 }
 
-const createCard = ({ name, age }) => {
+const createCard = ({ name, age, color }) => {
   return `
       <li class="card">
-        <div class="avatar"></div>
+      <div class="avatar" style="background-color: ${color}; border-radius: 50%; width: 30px; height: 30px;"></div>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Age:</strong> ${age}</p>
         <button class='delete-btn'>Delete</button>
@@ -44,41 +59,28 @@ const deleteCard = (event) => {
   }
 };
 
-// Создай веб-страницу с формой, где пользователь вводит имя, возраст и выбирает цвет аватара. После нажатия на кнопку "Добавить", введенные данные должны отображаться в списке ниже.
+function showRedAlert(message) {
+  if (document.querySelector(".red-alert-task-seven")) return;
+  const alertRedBox = document.createElement("div");
+  alertRedBox.classList.add("red-alert-task-seven");
+  alertRedBox.textContent = message;
+  document.body.appendChild(alertRedBox);
 
-// Каждый добавленный пользователь должен:
-// ✅ отображаться в виде карточки (имя, возраст, цветной кружок-аватар),
-// ✅ иметь кнопку "Удалить", которая удаляет конкретного пользователя,
-// ✅ если возраст меньше 18, добавить стиль с красным текстом, если 18 и больше — зеленый текст.
+  setTimeout(() => {
+    alertRedBox.classList.add("hide");
+    setTimeout(() => alertRedBox.remove(), 500);
+  }, 3000);
+}
 
-// Требования
-// Использовать document.createElement() для создания элементов.
-// Реализовать обработку событий (addEventListener).
-// Работать с innerHTML, append, remove().
-// Подсказка (HTML-шаблон)
-// html
-// Zkopírovat
-// Upravit
-// <form id="user-form">
-//   <input type="text" id="name" placeholder="Имя" required />
-//   <input type="number" id="age" placeholder="Возраст" required />
-//   <input type="color" id="avatar-color" />
-//   <button type="submit">Добавить</button>
-// </form>
+function showGreenalert(message) {
+  if (document.querySelector(".green-alert-task-seven")) return;
+  const alertRedBox = document.createElement("div");
+  alertRedBox.classList.add("green-alert-task-seven");
+  alertRedBox.textContent = message;
+  document.body.appendChild(alertRedBox);
 
-// <ul id="user-list"></ul>
-// Подсказка (JS-логика)
-// Получить элементы формы (querySelector).
-// Добавить обработчик submit для формы.
-// При отправке формы создать <li> с данными пользователя и кнопкой удаления.
-// Добавить цветной кружок (div с backgroundColor из input[type="color"]).
-// При нажатии на "Удалить" удалять <li>.
-// Дополнительное задание (если хочется сложнее)
-// 🔥 Добавить валидацию:
-
-// Имя не должно быть пустым.
-// Возраст должен быть больше 0.
-// Если поле не заполнено, показывать сообщение об ошибке.
-// 🔥 Добавить редактирование пользователя:
-
-// Добавить кнопку "Редактировать", чтобы можно было поменять данные
+  setTimeout(() => {
+    alertRedBox.classList.add("hide");
+    setTimeout(() => alertRedBox.remove(), 500);
+  }, 2000);
+}
