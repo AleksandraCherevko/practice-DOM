@@ -52,16 +52,53 @@ function handleSubmit(event) {
   } else if (deadlineDate <= now) {
     return alert`check date and time correct format`;
   }
+
+  const createMarkup = createTaskCard({
+    topic: topicInput,
+    task: taskInput,
+    deadline: deadlineInput,
+  });
+  checkBoxForm.insertAdjacentHTML("beforeend", createMarkup);
+  const deleteCardBtn =
+    checkBoxForm.lastElementChild.querySelector(".delete-task-btn");
+  deleteCardBtn.addEventListener("click", deleteTaskCard);
+
+  todoForm.reset();
 }
 
-const createMarkup = createTaskCard({
-  topic: topicInput,
-  task: taskInput,
-  deadline: deadlineInput,
+const createTaskCard = ({ topic, task, deadline }) => {
+  return `
+   <div class='task-card'> 
+   <input class='checkbox-input' type="checkbox" id="vehicle1" name="vehicle1" >
+     <label class='topic-label' for="vehicle1">${topic}</label><br>
+     <p>My task: ${task}</p>
+      <p>Deadline: ${deadline}</p>
+      <button class='delete-task-btn'>Delete task</button>
+   </div>`;
+};
+
+const inlineTaskCard = (event) => {
+  const checkbox = event.target;
+  const labelTopic = checkbox.nextElementSibling;
+
+  if (checkbox.checked) {
+    labelTopic.style.color = "red";
+    labelTopic.style.textDecoration = "line-through";
+  } else {
+    labelTopic.style.color = "black";
+    labelTopic.style.textDecoration = "none";
+  }
+};
+
+document.addEventListener("change", (event) => {
+  if (event.target.classList.contains("checkbox-input")) {
+    inlineTaskCard(event);
+  }
 });
 
-const createTask = ({ topic, task, deadline }) => {
-  return `
-    <input type="checkbox" id="vehicle1" name="vehicle1" value="">
-    `;
+const deleteTaskCard = (event) => {
+  const taskCard = event.target.closest(".task-card");
+  if (taskCard) {
+    taskCard.remove();
+  }
 };
