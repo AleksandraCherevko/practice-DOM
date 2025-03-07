@@ -36,21 +36,21 @@ const checkBoxForm = document.querySelector(".checkbox");
 todoForm.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
-  event.preventDefault();
+  event.preventDefault();ц
 
   const topicInput = event.target.elements.topic.value.trim();
   const taskInput = event.target.elements.task.value.trim();
   const deadlineInput = event.target.elements.deadline.value.trim();
   const deadlineDate = new Date(deadlineInput);
   const now = new Date();
-  if (topicInput === "") {
-    return alert`Enter topic of your task`;
-  } else if (taskInput === "") {
-    return alert`Enter your task`;
+  if (!topicInput) {
+    return alert("enter topic of your task");
+  } else if (!taskInput) {
+    return alert("Enter your task");
   } else if (!deadlineInput) {
-    return alert`Choose date and time for your deadline`;
-  } else if (deadlineDate <= now) {
-    return alert`check date and time correct format`;
+    return alert("Choose date and time for your deadline");
+  } else if (isNaN(deadlineDate.getTime()) || deadlineDate <= now) {
+    return alert("check date and time correct format");
   }
 
   const createMarkup = createTaskCard({
@@ -58,9 +58,11 @@ function handleSubmit(event) {
     task: taskInput,
     deadline: deadlineInput,
   });
+
   checkBoxForm.insertAdjacentHTML("beforeend", createMarkup);
-  const deleteCardBtn =
-    checkBoxForm.lastElementChild.querySelector(".delete-task-btn");
+
+  const taskCard = checkBoxForm.lastElementChild;
+  const deleteCardBtn = taskCard.querySelector(".delete-task-btn");
   deleteCardBtn.addEventListener("click", deleteTaskCard);
 
   todoForm.reset();
