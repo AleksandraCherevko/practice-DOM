@@ -29,9 +29,39 @@
 // Результат:
 // Интерактивный список задач с основными функциями, работающий без перезагрузки страницы.
 
+const todoForm = document.querySelector("#todo-list-form");
+const textarea = document.querySelector("#task");
+const checkBoxForm = document.querySelector(".checkbox");
 
+todoForm.addEventListener("submit", handleSubmit);
 
+function handleSubmit(event) {
+  event.preventDefault();
 
+  const topicInput = event.target.elements.topic.value.trim();
+  const taskInput = event.target.elements.task.value.trim();
+  const deadlineInput = event.target.elements.deadline.value.trim();
+  const deadlineDate = new Date(deadlineInput);
+  const now = new Date();
+  if (topicInput === "") {
+    return alert`Enter topic of your task`;
+  } else if (taskInput === "") {
+    return alert`Enter your task`;
+  } else if (!deadlineInput) {
+    return alert`Choose date and time for your deadline`;
+  } else if (deadlineDate <= now) {
+    return alert`check date and time correct format`;
+  }
+}
 
+const createMarkup = createTaskCard({
+  topic: topicInput,
+  task: taskInput,
+  deadline: deadlineInput,
+});
 
-
+const createTask = ({ topic, task, deadline }) => {
+  return `
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="">
+    `;
+};
