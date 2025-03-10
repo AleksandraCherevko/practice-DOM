@@ -30,13 +30,25 @@
 // Интерактивный список задач с основными функциями, работающий без перезагрузки страницы.
 
 const todoForm = document.querySelector("#todo-list-form");
+todoForm.classList.add("form-task-eight");
 const textarea = document.querySelector("#task");
+textarea.classList.add("inputs-task-eight");
+
+const topicarea = document.querySelector("#topic");
+topicarea.classList.add("inputs-task-eight");
+
+const deadlinearea = document.querySelector("#deadline");
+deadlinearea.classList.add("inputs-task-eight");
+
+const bodyTaskEight = document.querySelector("body");
+bodyTaskEight.classList.add("body-task-eight");
+
 const checkBoxForm = document.querySelector(".checkbox");
 
 todoForm.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
-  event.preventDefault();ц
+  event.preventDefault();
 
   const topicInput = event.target.elements.topic.value.trim();
   const taskInput = event.target.elements.task.value.trim();
@@ -44,13 +56,17 @@ function handleSubmit(event) {
   const deadlineDate = new Date(deadlineInput);
   const now = new Date();
   if (!topicInput) {
-    return alert("enter topic of your task");
+    showAlert("Enter topic of your task");
+    return;
   } else if (!taskInput) {
-    return alert("Enter your task");
+    showAlert("Enter your task");
+    return;
   } else if (!deadlineInput) {
-    return alert("Choose date and time for your deadline");
+    showAlert("Choose date and time for your deadline");
+    return;
   } else if (isNaN(deadlineDate.getTime()) || deadlineDate <= now) {
-    return alert("check date and time correct format");
+    showAlert("Check date and time correct format");
+    return;
   }
 
   const createMarkup = createTaskCard({
@@ -72,9 +88,9 @@ const createTaskCard = ({ topic, task, deadline }) => {
   return `
    <div class='task-card'> 
    <input class='checkbox-input' type="checkbox" id="vehicle1" name="vehicle1" >
-     <label class='topic-label' for="vehicle1">${topic}</label><br>
-     <p>My task: ${task}</p>
-      <p>Deadline: ${deadline}</p>
+     <label class='topic-label' for="vehicle1"><strong>${topic}</strong></label><br>
+     <p><strong>My task:</strong> ${task}</p>
+      <p><strong>Deadline:</strong> ${deadline}</p>
       <button class='delete-task-btn'>Delete task</button>
    </div>`;
 };
@@ -104,3 +120,16 @@ const deleteTaskCard = (event) => {
     taskCard.remove();
   }
 };
+
+function showAlert(message) {
+  if (document.querySelector(".red-alert-task-eight")) return;
+  const alertRedBox = document.createElement("div");
+  alertRedBox.classList.add("red-alert-task-eight");
+  alertRedBox.textContent = message;
+  document.body.appendChild(alertRedBox);
+
+  setTimeout(() => {
+    alertRedBox.classList.add("hide");
+    setTimeout(() => alertRedBox.remove(), 500);
+  }, 3000);
+}
