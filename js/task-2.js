@@ -70,15 +70,24 @@ const images = [
 
 // 3 variant
 
-const list = document.querySelector(".gallery");
-list.classList.add("list-second-task");
+// const list = document.querySelector(".gallery");
+// list.classList.add("list-second-task");
 
-const markupList = (image) => {
-  return `<li class="item-second-task">
-    <img src="${image.url}" alt="${image.alt}" />
-  </li>`;
+// const markupList = (image) => {
+//   return `<li class="item-second-task">
+//     <img src="${image.url}" alt="${image.alt}" />
+//   </li>`;
+// };
+
+// const markup = images.map(markupList).join("");
+
+// list.insertAdjacentHTML("beforeend", markup);
+
+const list = document.querySelector(".gallery");
+
+const createElement = (images) => {
+  return `<li><img src="${images.url}" alt="${images.alt}"></li>`;
 };
 
-const markup = images.map(markupList).join("");
-
+const markup = images.map(createElement).join("");
 list.insertAdjacentHTML("beforeend", markup);
